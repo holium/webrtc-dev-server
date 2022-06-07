@@ -1,2 +1,1 @@
-# webrtc-dev-server
-A simple webrtc server to host for development
+# A simple websocket server to host for development
