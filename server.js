@@ -76,14 +76,12 @@ wss.on("connection", function connection(ws) {
       );
       // Find all other sockets in those rooms
       const otherSocketIds = roomsWithSocket.reduce((acc, roomId) => {
-        acc.push(
-          ...rooms[roomId]
-          // TEMPORARY: send payload back to current client to test
-          // .filter((socketId) => socketId !== wsId)
-        );
+        acc.push(...rooms[roomId]);
         return acc;
       }, []);
-      const otherSockets = otherSocketIds.map((socketId) => sockets[socketId]);
+      const otherSockets = otherSocketIds
+        .filter((socketId) => socketId !== wsId) // TEMPORARY: send payload back to current client to test
+        .map((socketId) => sockets[socketId]);
 
       // Send the message to all other sockets
       otherSockets.forEach((socket) => {
